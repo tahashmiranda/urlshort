@@ -19,7 +19,6 @@ func MapHandler(pathsToUrls map[string]string, fallback http.Handler) http.Handl
 		fmt.Println("%T %V", url, url)
 		if val, ok := pathsToUrls[url]; ok {
 			http.Redirect(w, r, val, http.StatusFound)
-			return
 		}
 		fallback.ServeHTTP(w, r)
 	}
