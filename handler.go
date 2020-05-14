@@ -18,13 +18,11 @@ func MapHandler(pathsToUrls map[string]string, fallback http.Handler) http.Handl
 		url := r.URL.Path
 		fmt.Println("%T %V", url, url)
 		if val, ok := pathsToUrls[url]; ok {
-			http.Redirect(w, r, url, 301)
+			http.Redirect(w, r, val, http.StatusFound)
 			return
 		}
 		fallback.ServeHTTP(w, r)
-
-
-	})
+	}
 }
 
 // YAMLHandler will parse the provided YAML and then return
